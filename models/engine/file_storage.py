@@ -14,6 +14,16 @@ class FileStorage:
     def all(self):
         """ Return Dict __objects """
         return FileStorage.__objects
+    def new(self, obj):
+        """ Return dictionarym __obj"""
+        ocname = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
+    def save(self):
+        """ Serializes object to Json file"""
+        odict = FileStorage.__objects
+        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(objdict, f)
     def reload(self):
         """ Deserialize the Json file """
         try:
