@@ -1,4 +1,4 @@
-#!/usrbin/python3
+#!/usr/bin/python3
 """ class User """
 from models.babse_model import BaseModel
 
