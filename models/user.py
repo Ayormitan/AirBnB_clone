@@ -2,7 +2,7 @@
 """ class User """
 from models.babse_model import BaseModel
 
-Class User(BaseModel):
+class User(BaseModel):
     """ Represent a user.
     Attributes:
         email (str): The email of user.
