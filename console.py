@@ -13,7 +13,8 @@ class HBNBCommand (cmd.Cmd):
     """
     prompt = "(hbnb) "
     __classes = {
-            "BaseModel"
+            "BaseModel",
+            "User"
     }
     def emptyline(self):
         """Empty line + ENTER wouldn’t execute anything"""
