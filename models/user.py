@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ class User """
-from models.babse_model import BaseModel
+from models.base_model import BaseModel
 
 class User(BaseModel):
     """ Represent a user.
