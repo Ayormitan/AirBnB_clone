@@ -4,6 +4,7 @@ import cmd
 import re
 from models import storage
 from shlex import split
+from models.base_model import BaseModel
 class HBNBCommand (cmd.Cmd):
     """Class defintion for HBNB command line interpreter
     Attributes:
@@ -19,6 +20,26 @@ class HBNBCommand (cmd.Cmd):
     def do_quit(self, arg):
         """Exit the program """
         return True
+    def default(self, arg):
+        """ Default behaviour for cmd module fr invalide input """
+        argdict = {
+                "all": self.do_all,
+                "show": self.do_show,
+                "destroy": self.do_destroy,
+                "count": self.do_count,
+                "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            arg1 = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", arg1[1])
+            if match is not None:
+                command = [arg1[1][:matcch.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(arg1[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown sythax: {}".format(arg))
+        return False
     def do_EOF(self, arg):
         """Specifies EOF to also quit the program"""
         print("")
@@ -122,7 +143,15 @@ class HBNBCommand (cmd.Cmd):
                 else:
                     obj.__dict__[k] = v
         storage.save()
-
+    def do_count(self, arg):
+        """ Usage: count <class> or <class>.count()
+        Retrieve the number of instances"""
+        arg1 = parse(arg)
+        count = 0
+        for obj in storage.all().value():
+            if arg1[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
