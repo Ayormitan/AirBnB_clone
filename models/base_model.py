@@ -4,6 +4,7 @@ import models
 from uuid import uuid4
 from datetime import datetime
 
+
 class BaseModel:
     """BaseModel defination for the HBnB projet"""
     def ___init__(self, *args, **kwargs):
