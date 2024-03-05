@@ -21,6 +21,11 @@ class HBNBCommand (cmd.Cmd):
     __classes = {
             "BaseModel",
             "User"
+            "State"
+            "City"
+            "Place"
+            "Amenity"
+            "Review"
     }
     def emptyline(self):
         """Empty line + ENTER wouldn’t execute anything"""
