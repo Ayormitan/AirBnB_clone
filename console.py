@@ -115,7 +115,7 @@ class HBNBCommand (cmd.Cmd):
                 elif len(arg1) == 0:
                     obj1.append(obj.__str__())
             print(obj1)
-    def do_updtate(self, arg):
+    def do_update(self, arg):
         """Usage <class> <id> <attribute_name> <attribute_value> """
         arg1 = parse(arg)
         objdict = storage.all()
